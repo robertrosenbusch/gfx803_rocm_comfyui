@@ -64,12 +64,10 @@ RUN pip install psutil && \
 RUN ./venv/bin/pip install -e /pyrsmi && \
     true
     
-
 ENV args="" 
 
 EXPOSE ${PORT}
 
-#VOLUME [ "/ComfyUI", "/ComfyUI/custom_nodes","/ComfyUI/models","/ComfyUI/output","/ComfyUI/input"]
 ENTRYPOINT ./venv/bin/python main.py --listen --lowvram --port ${PORT} --fast ${COMMANDLINE_ARGS}  >> /comfy/comfy_rocm63_pt24.log 2>&1
 
 CMD ["/bin/bash","-c"]
