@@ -1,4 +1,3 @@
-#FROM rocm62_pt24:latest
 FROM rocm62_pt24:latest
 SHELL ["/bin/bash", "-c"]  
 ENV PORT=8188 \
@@ -65,13 +64,10 @@ RUN pip install psutil && \
 RUN ./venv/bin/pip install -e /pyrsmi && \
     true
     
-
 ENV args="" 
 
 EXPOSE ${PORT}
-EXPOSE 22/tcp
 
-VOLUME [ "/ComfyUI", "/ComfyUI/custom_nodes","/ComfyUI/models","/ComfyUI/output","/ComfyUI/input"]
-#ENTRYPOINT ./venv/bin/python main.py --listen --port "${PORT}" ${COMMANDLINE_ARGS}
-ENTRYPOINT ./venv/bin/python main.py --listen --lowvram --fast ${COMMANDLINE_ARGS}  >> /comfy/comfy_rocm62_pt24.log 2>&1
+ENTRYPOINT ./venv/bin/python main.py --listen --lowvram --port ${PORT} --fast ${COMMANDLINE_ARGS}  >> /comfy/comfy_rocm62_pt24.log 2>&1
+
 CMD ["/bin/bash","-c"]
