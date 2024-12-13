@@ -9,6 +9,7 @@ ENV PORT=8188 \
     radePYTHONIOENCODING=UTF-8 \
     REQS_FILE='requirements.txt' \
     COMMANDLINE_ARGS='' \
+    PIP_ROOT_USER_ACTION='ignore' \
     ### For your AMD GPU
     PYTORCH_ROCM_ARCH=gfx803 
 

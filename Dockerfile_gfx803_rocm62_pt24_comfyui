@@ -9,13 +9,14 @@ ENV PORT=8188 \
     radePYTHONIOENCODING=UTF-8 \
     REQS_FILE='requirements.txt' \
     COMMANDLINE_ARGS='' \
+    PIP_ROOT_USER_ACTION='ignore' \
     ### For your AMD GPU
     PYTORCH_ROCM_ARCH=gfx803 
 
 WORKDIR /
 
-RUN pip install cmake mkl mkl-include && \
-    pip install --upgrade pip wheel && \
+RUN pip install cmake mkl mkl-include  && \
+    pip install --upgrade pip wheel  && \
     true
 
 ### Install PyRSMI to monitore the GPU via ComfyUI-Crystools
@@ -41,14 +42,14 @@ RUN touch comfi.sh && \
 
 RUN python -m venv venv && \
     ./venv/bin/python -m pip install --upgrade pip && \
-    ./venv/bin/pip install psutil && \
-    ./venv/bin/pip install -r requirements.txt && \
-    ./venv/bin/pip uninstall -y torch torchvision && \    
-    ./venv/bin/pip install /pytorch/dist/torch*.whl && \
-    ./venv/bin/pip install /vision/dist/torchvision*.whl && \
-    ./venv/bin/python -m pip install -e /pyrsmi/. && \
-    ./venv/bin/python -m pip uninstall numpy -y && \
-    ./venv/bin/pip install numpy==1.26.4 && \
+    ./venv/bin/pip install  psutil && \
+    ./venv/bin/pip install  -r requirements.txt && \
+    ./venv/bin/pip uninstall  -y torch torchvision && \    
+    ./venv/bin/pip install  /pytorch/dist/torch*.whl && \
+    ./venv/bin/pip install  /vision/dist/torchvision*.whl && \
+    ./venv/bin/python -m pip install  -e /pyrsmi/. && \
+    ./venv/bin/python -m pip uninstall numpy -y  && \
+    ./venv/bin/pip  install numpy==1.26.4 && \
     true    
 
 
@@ -64,7 +65,7 @@ WORKDIR /ComfyUI
 RUN pip install psutil && \
     true    
 
-RUN ./venv/bin/pip install -e /pyrsmi && \
+RUN ./venv/bin/pip  install -e /pyrsmi && \
     true
     
 ENV args="" 
